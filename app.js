@@ -10,6 +10,13 @@ let items = [
         category: 'jean'
     },
     {
+        img : 'imgs/p1.jpg',
+        name: 'Versace',
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit',
+        price: 149.99,
+        category: 'parfum'
+    },
+    {
         img : 'imgs/t2.jpg',
         name: 'T-shirt Homme',
         description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit',
@@ -25,7 +32,7 @@ let items = [
     },
     {
         img : 'imgs/snk1.jpg',
-        name: 'Sneakers1',
+        name: 'Chaussurre de sport',
         description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit',
         price: 110,
         category: 'sneaker'
@@ -57,19 +64,18 @@ let items = [
 
 function itemCard(img, title, description, price){
     let clotheCard = document.createElement("div");
-
+    
     clotheCard.classList.add('clothe-card');
-
-    clotheCard.innerHTML = `
-    <div class="img-div">
-        <img src="${img}">
-    </div>
-    <div class="clothe-info">
-        <h2>${title}</h2>
-        <p>${description}</p>
-        <p>$${price}</p>
-    </div>`;
-
+    
+        clotheCard.innerHTML = `
+        <div class="img-div">
+            <img src="${img}">
+        </div>
+        <div class="clothe-info">
+            <h2>${title}</h2>
+            <p>${description}</p>
+            <p>$${price}</p>
+        </div>`;
     containItem.appendChild(clotheCard);
 }
 
@@ -82,10 +88,12 @@ items.forEach(item => {
 })
 
 search.addEventListener('input', function(){
+    let n = 0;
     containItem.innerHTML = "";
     if(search.value != ''){
         items.forEach(item => {
-            if(item.category.toLocaleLowerCase().includes(search.value) || item.name.toLocaleLowerCase().includes(search.value)){
+            if((item.category.toLocaleLowerCase().includes(search.value) || item.name.toLocaleLowerCase().includes(search.value)) && n < 3){
+                n++;
                 itemCard(item.img, item.name, item.description, item.price);
             }
         })
